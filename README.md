@@ -138,7 +138,7 @@ Start client:
 npm run dev
 ```
 
-Access: `http://localhost:3000`
+Access: `http://localhost:5173`
 
 ## 📖 API Documentation
 
@@ -152,27 +152,121 @@ http://localhost:4000
 **Process Clerk Webhooks**
 ```http
 POST /api/user/webhooks
+Method: POST
+Description: Handles Clerk user events (create, update, delete)
+Request Body:
+{
+  "data": {
+    "id": "clerk_12345",
+    "email_addresses": [{"email_address": "user@example.com"}],
+    "first_name": "John",
+    "last_name": "Doe",
+    "image_url": "https://example.com/photo.jpg"
+  },
+  "type": "user.created"
+}
 ```
+
 
 **Get User Credits**
 ```http
 GET /api/user/credits
+Method: GET
+Authentication: Required (JWT token)
+```
+
+**Response
+```json
+{
+  "success": true,
+  "credits": 5
+}
 ```
 
 **Initiate Razorpay Payment**
 ```http
 POST /api/user/pay-razor
+Method: POST
+Authentication: Required
+Request Body:
+{
+  "planId": "Basic"
+}
+```
+
+**Response
+```json
+{
+  "success": true,
+  "order": {
+    "amount": 1000,
+    "currency": "INR",
+    "id": "order_ABC123",
+    "receipt": "receipt_id"
+  }
+}
 ```
 
 **Verify Razorpay Payment**
 ```http
 POST /api/user/verify-razor
+Method: POST
+Request Body:
+{
+  "razorpay_order_id": "order_ABC123",
+  "razorpay_payment_id": "pay_XYZ987",
+  "razorpay_signature": "signature_here"
+}
+```
+
+**Response
+```json
+{
+  "success": true,
+  "message": "Credits Added"
+}
 ```
 
 **Remove Background**
 ```http
 POST /api/image/remove-bg
+Method: POST
+Authentication: Required
+Form Data: image (file upload)
 ```
+
+**Response
+```json
+{
+  "success": true,
+  "resultImage": "data:image/png;base64,...",
+  "creditBalance": 4,
+  "message": "Background Removed"
+}
+```
+
+
+## Payment Flow
+sequenceDiagram
+    participant User
+    participant Client
+    participant Server
+    participant Razorpay
+    
+    User->>Client: Selects credit package
+    Client->>Server: POST /api/user/pay-razor
+    Server->>Razorpay: Create order
+    Razorpay-->>Server: Order details
+    Server-->>Client: Order response
+    Client->>Razorpay: Open payment modal
+    User->>Razorpay: Complete payment
+    Razorpay-->>Client: Payment success
+    Client->>Server: POST /api/user/verify-razor
+    Server->>Razorpay: Verify payment
+    Razorpay-->>Server: Verification result
+    Server->>Database: Update user credits
+    Server-->>Client: Success response
+    Client->>User: Show updated credits
 
 ## 📄 License
 Licensed under the MIT License.

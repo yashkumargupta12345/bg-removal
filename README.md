@@ -1,7 +1,5 @@
 # Background Removal Tool
 
-![Project Demo](https://i.imgur.com/demo-image.png)
-
 A full-stack application for removing image backgrounds using AI. Built with **React (Vite)** frontend and **Express** backend, integrated with **Clerk authentication**, **Razorpay payments**, and **ClipDrop API**.
 
 ## 🚀 Features
@@ -29,19 +27,62 @@ A full-stack application for removing image backgrounds using AI. Built with **R
 ![ClipDrop](https://img.shields.io/badge/ClipDrop-00C4CC?style=for-the-badge&logo=clipdrop&logoColor=white)
 
 ## 📂 Project Structure
-\`\`\`
+```markdown
+## Project Structure (Plain Text Version)
 .bg-removal/
-├── client/
-│   ├── public/
-│   └── src/
-│       ├── components/
-│       └── pages/
-└── server/
-    ├── controllers/
-    ├── middlewares/
-    ├── models/
-    └── routes/
-\`\`\`
+|-- .gitignore
+|-- client/
+|   |-- .env
+|   |-- eslint.config.js
+|   |-- index.html
+|   |-- package.json
+|   |-- README.md
+|   |-- vercel.json
+|   |-- vite.config.js
+|   |-- public/
+|   |   |-- bg_layer.png
+|   |   |-- favicon.svg
+|   |   |-- slide_icon.svg
+|   |   |-- vite.svg
+|   |-- src/
+|       |-- App.jsx
+|       |-- index.css
+|       |-- main.jsx
+|       |-- assets/
+|       |-- components/
+|       |   |-- BgSlider.jsx
+|       |   |-- Footer.jsx
+|       |   |-- Header.jsx
+|       |   |-- Navbar.jsx
+|       |   |-- Steps.jsx
+|       |   |-- Testimonials.jsx
+|       |   |-- Upload.jsx
+|       |-- context/
+|       |   |-- AppContext.jsx
+|       |-- pages/
+|           |-- BuyCredit.jsx
+|           |-- Home.jsx
+|           |-- Result.jsx
+|-- server/
+    |-- .env
+    |-- package.json
+    |-- server.js
+    |-- vercel.json
+    |-- configs/
+    |   |-- mongodb.js
+    |-- controllers/
+    |   |-- ImageController.js
+    |   |-- UserController.js
+    |-- middlewares/
+    |   |-- auth.js
+    |   |-- multer.js
+    |-- models/
+    |   |-- transactionModel.js
+    |   |-- userModel.js
+    |-- routes/
+        |-- imageRoutes.js
+        |-- userRoutes.js
+```
 
 ## 📦 Getting Started
 
@@ -53,85 +94,85 @@ A full-stack application for removing image backgrounds using AI. Built with **R
 
 ### Installation
 
-\`\`\`bash
+```bash
 git clone https://github.com/yourusername/bg-removal.git
 cd bg-removal
-\`\`\`
+```
 
 **Setup server**
-\`\`\`bash
+```bash
 cd server
 npm install
-\`\`\`
+```
 
 Create `.env` with:
-\`\`\`
+```
 MONGODB_URI=
 CLERK_WEBHOOK_SECRET=
 CLIPDROP_API=
 RAZORPAY_KEY_ID=
 RAZORPAY_KEY_SECRET=
 CURRENCY=INR
-\`\`\`
+```
 
 Start server:
-\`\`\`bash
+```bash
 npm run server
-\`\`\`
+```
 
 **Setup client**
-\`\`\`bash
+```bash
 cd ../client
 npm install
-\`\`\`
+```
 
 Create `.env` with:
-\`\`\`
+```
 VITE_CLERK_PUBLISHABLE_KEY=
 VITE_BACKEND_URL=http://localhost:4000
 VITE_RAZORPAY_KEY_ID=
-\`\`\`
+```
 
 Start client:
-\`\`\`bash
+```bash
 npm run dev
-\`\`\`
+```
 
 Access: `http://localhost:3000`
 
 ## 📖 API Documentation
 
 ### Base URL
-\`\`\`
+```
 http://localhost:4000
-\`\`\`
+```
 
 ### Endpoints
 
 **Process Clerk Webhooks**
-\`\`\`http
+```http
 POST /api/user/webhooks
-\`\`\`
+```
 
 **Get User Credits**
-\`\`\`http
+```http
 GET /api/user/credits
-\`\`\`
+```
 
 **Initiate Razorpay Payment**
-\`\`\`http
+```http
 POST /api/user/pay-razor
-\`\`\`
+```
 
 **Verify Razorpay Payment**
-\`\`\`http
+```http
 POST /api/user/verify-razor
-\`\`\`
+```
 
 **Remove Background**
-\`\`\`http
+```http
 POST /api/image/remove-bg
-\`\`\`
+```
 
 ## 📄 License
 Licensed under the MIT License.

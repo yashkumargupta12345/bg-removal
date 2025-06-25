@@ -173,15 +173,14 @@ Request Body:
 GET /api/user/credits
 Method: GET
 Authentication: Required (JWT token)
-```
-
-**Response
-```json
+Response
 {
   "success": true,
   "credits": 5
 }
 ```
+
+
 
 **Initiate Razorpay Payment**
 ```http
@@ -192,10 +191,8 @@ Request Body:
 {
   "planId": "Basic"
 }
-```
 
-**Response
-```json
+Response
 {
   "success": true,
   "order": {
@@ -207,6 +204,8 @@ Request Body:
 }
 ```
 
+
+
 **Verify Razorpay Payment**
 ```http
 POST /api/user/verify-razor
@@ -217,15 +216,15 @@ Request Body:
   "razorpay_payment_id": "pay_XYZ987",
   "razorpay_signature": "signature_here"
 }
-```
 
-**Response
-```json
+Response
 {
   "success": true,
   "message": "Credits Added"
 }
 ```
+
+
 
 **Remove Background**
 ```http
@@ -233,10 +232,8 @@ POST /api/image/remove-bg
 Method: POST
 Authentication: Required
 Form Data: image (file upload)
-```
 
-**Response
-```json
+Response
 {
   "success": true,
   "resultImage": "data:image/png;base64,...",
@@ -245,28 +242,9 @@ Form Data: image (file upload)
 }
 ```
 
+![deepseek_mermaid_20250625_f5a514](https://github.com/user-attachments/assets/dffab25f-9628-4de1-92b8-82046e4f58d2)
 
-## Payment Flow
-sequenceDiagram
-    participant User
-    participant Client
-    participant Server
-    participant Razorpay
-    
-    User->>Client: Selects credit package
-    Client->>Server: POST /api/user/pay-razor
-    Server->>Razorpay: Create order
-    Razorpay-->>Server: Order details
-    Server-->>Client: Order response
-    Client->>Razorpay: Open payment modal
-    User->>Razorpay: Complete payment
-    Razorpay-->>Client: Payment success
-    Client->>Server: POST /api/user/verify-razor
-    Server->>Razorpay: Verify payment
-    Razorpay-->>Server: Verification result
-    Server->>Database: Update user credits
-    Server-->>Client: Success response
-    Client->>User: Show updated credits
+
 
 ## 📄 License
 Licensed under the MIT License.

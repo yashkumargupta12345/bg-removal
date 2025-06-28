@@ -2,10 +2,9 @@
 
 A full-stack application for removing image backgrounds using AI. Built with **React (Vite)** frontend and **Express** backend, integrated with **Clerk authentication**, **Razorpay payments**, and **ClipDrop API**.
 
-### URL 
-```
-    bg-removal-siyi.vercel.app
-```
+## 🌐 Live Website
+[Visit bg-removal](bg-removal-siyi.vercel.app)
+
 
 ## 🚀 Features
 - 🔐 **Secure Authentication**: User sign-up/sign-in with Clerk

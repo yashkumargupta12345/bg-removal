@@ -3,7 +3,7 @@
 A full-stack application for removing image backgrounds using AI. Built with **React (Vite)** frontend and **Express** backend, integrated with **Clerk authentication**, **Razorpay payments**, and **ClipDrop API**.
 
 ## 🌐 Live Website
-[![Live Site](https://img.shields.io/badge/Live%20Site-BG%20Removal-blue)](bg-removal-siyi.vercel.app)
+[![Live Site](https://img.shields.io/badge/Live%20Site-BG%20Removal-blue)](http://bg-removal-siyi.vercel.app)
 
 
 
